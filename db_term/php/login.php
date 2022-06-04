@@ -10,6 +10,7 @@ $password = 'p39pwt12';
 // echo"fucking";
 
 
+
 try {
     $conn = new PDO($dns, $username, $password);        
     $id = $_GET['id'];  

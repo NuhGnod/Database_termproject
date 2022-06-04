@@ -16,6 +16,7 @@ function cancel_display() {
 document.getElementById("signup1").addEventListener("click", signup); 
 //회원가입 정보 입력
 
+
 function signup() {
     var kk = false;
     

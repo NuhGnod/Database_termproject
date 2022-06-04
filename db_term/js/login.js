@@ -38,6 +38,7 @@ function login() {
                 id:id0,
                 pw:pw0,
             },
+            
             success:function(res){
                 console.log(res);
                 let text= JSON.parse(res)

@@ -9,5 +9,6 @@ function cancel_(){
     //예약내용 취소.
     //db 연동하여 db 데이터 변경
 
+    
     alert("취소되었습니다.");
 }

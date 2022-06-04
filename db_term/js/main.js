@@ -23,6 +23,7 @@ function search(){
     let db_ticketing_infoW;
     let db_length;
     let db_rating;
+    
     let db_ticketing;
     let db_count;
     let db_actor;
@@ -201,6 +202,10 @@ function search(){
     }
     }
 init();
+
+//
+
+
 function init(){
     let login_bool = sessionStorage.getItem("login");
     let login_id = sessionStorage.getItem("id");
