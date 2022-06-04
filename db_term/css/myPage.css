@@ -1,0 +1,49 @@
+table {
+    font-family: "arial", "sans-serif";
+
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+tr {
+    border-bottom: 1px solid black;
+}
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    /* border:  1px solid black; */
+}
+th {
+    background-color: grey;
+}
+  
+hr {
+    border: 1px solid black;
+    border-bottom: 0px;
+    width: 100%;
+}
+#main{
+    cursor: pointer;
+    text-align: center;
+}
+#board_table {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    justify-self: center;
+}
+#board_search {
+    margin-bottom: 30px;
+    justify-self: center;
+}
+#board {
+    
+    width: 70vw;
+    display: grid;
+    /* border: 1px solid blue; */
+    margin:  auto;}
+#cancel{
+    margin-top: 30px;
+    justify-self: center;
+}

@@ -1,0 +1,41 @@
+table {
+    font-family: "arial", "sans-serif";
+
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+tr {
+    border-bottom: 1px solid black;
+}
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    /* border:  1px solid black; */
+}
+th {
+    background-color: grey;
+}
+
+h1 {
+    text-align: center;
+}
+.movie_schedule{
+    display: grid;
+    justify-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container{
+    display: grid;
+}
+#reservation{
+    margin-top: 50px;
+    width: 80px;
+    justify-self: right;
+    /* display: inline; */
+    /* margin-left: 60%; */
+}
+#main{
+    cursor: pointer;
+}

@@ -1,0 +1,126 @@
+h1 {
+    text-align: center;
+}
+body{
+    display: block;
+    
+}
+.top_navi{
+    display: grid;
+    margin-bottom: 2%;
+}
+#my_page {
+    margin-left: 10%;
+}
+#login{
+    justify-self: right;
+    /* margin-left: 70%; */
+    margin-right: 10%;
+}
+
+#my_page{
+    cursor: pointer;
+}
+#register_board {
+    margin-left: 50%;
+    display: none;
+    margin-right: 50px;
+}
+#my_board {
+    display: none;
+    margin-right: 50px;
+}
+#update {
+    display: none;
+    margin-left: 30px;
+}
+#logout {
+    justify-self: right;
+    /* height: 30px; */
+    /* flex-grow: 1; */
+    /* display: inline-block; */
+    display: inline-block;
+    margin-right: 10%;
+}
+#board_search {
+    display: inline-block;
+
+    margin-bottom: 20px;
+    height: 100px;
+    /* width: auto; */
+    margin-left: auto;
+    margin-right: auto;
+    justify-self: center;
+    /* border: 1px solid blue; */
+    /* width: 100%;      */
+}
+#reservation{
+    height: 50px;
+    justify-self: right;
+    display: inline;
+    width: 100px;
+    margin-top: 50px;
+}
+#board {
+    width: 70vw;
+    height: 80vh;
+    display: grid;
+    /* border: 1px solid blue; */
+    margin:  auto;
+}
+.category {
+    width: 200px;
+    margin: 5px;
+    height: 25px;
+}
+#category_search {
+    color: white;
+    background-color: black;
+    margin: 5px;
+    height: 30px;
+}
+select {
+    width: 100px;
+    margin: 5px;
+    height: 30px;
+}
+
+#board_table {
+    margin-left: auto;
+    margin-right: auto;
+    justify-self: center;
+}
+#board_page {
+    align-self: flex-end;
+    /* text-align: end; */
+    margin-left: auto;
+    margin-right: auto;
+    justify-self: center;
+}
+
+#page_icon1 {
+    width: 12px;
+    margin: 0px 20px;
+}
+#page_icon2 {
+    width: 12px;
+    margin: 0px 20px;
+}
+table {
+    font-family: "arial", "sans-serif";
+
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+tr {
+    border-bottom: 1px solid black;
+}
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    /* border:  1px solid black; */
+}
+th {
+    background-color: grey;
+}

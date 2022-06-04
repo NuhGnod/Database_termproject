@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../css/main.css?ver=1" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       <title>Document</title>
+
+    </head>
+    <body>
+        <h1>CNU THEATER</h1>
+        <div class="top_navi" id="login_div">
+            <img id="my_page" src="../img/icons8-게스트-남성-48.png">
+            <button id="login">로그인</button>
+            <button id="logout">로그아웃</button>
+        </div>  
+        <div id="board">
+            <div id="board_search">
+                <label for="category_input">제목</label>
+                <input  
+                    class="category"
+                    id="category_input"
+                    placeholder="영화 제목 입력"
+                />
+                <br/>
+                <label for="date">날짜</label>
+                <input class="category" max="99" min="00" type="number" maxlength="2" id="yy" placeholder="ex) yy" >
+                <input class="category" max="12" min="01" type="number" maxlength="2" id="mm" placeholder="ex) mm">
+                <input class="category" max="31" min="01" type="number" maxlength="2" id="dd" placeholder="ex) dd">
+                <input type="button" id="category_search" value="검색" />
+                <br />
+              
+            </div>
+
+            <div id="board_table">
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <th>제목
+
+                            </th>
+                            <th>개봉일</th>
+                            <th>감독</th>
+                            <th>출연자</th>
+                            <th>총 상영 시간</th>
+                            <th>관람 등급</th>
+                            <th>예매자 수</th>
+                            <th>누적관객 수</th>
+                            <th>선택</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <tr>
+                            <td>
+                                범죄도시 2
+                            </td>
+                            <td>
+                                김동훈
+                            </td>
+                            <td>
+                                김동훈 1, 김동훈 2, 김동훈 3, 김동훈 4,,,,,ㄹ매ㅑㅜ랭뭎매ㅑㅜ패먀푸ㅑㅁ풒팽푸뭎애ㅜ
+                            </td>
+                            <td>
+                                범죄도시 2
+                            </td>
+                            <td>
+                                범죄도시 2
+                            </td>
+                            <td>
+                                범죄도시 2
+                            </td>
+                            <td>
+                                범죄도시 2
+                            </td>
+                            <!-- 누적 관객 수  -->
+                            <!-- 상영중인 영화에 대해서만 보여야 한다. -->
+                            <td>
+                                범죄도시 2
+                            </td>
+                            <td>
+                                <input type="checkbox" class="choice">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button id="reservation">예매하기</button>
+            
+        </div>
+
+        <script src="../js/main.js?ver=1"></script>
+
+    </body>
+</html>
