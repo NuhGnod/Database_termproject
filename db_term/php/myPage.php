@@ -18,7 +18,7 @@ try {
         $id = $_GET['id'];  
 
         $sql = 
-        "SELECT * from schedule s ,(select sid, seats from ticketing where cid = '".$id."') ts
+        "SELECT * from schedule s ,(select sid, seats, status from ticketing where cid = '".$id."') ts
         where  ts.sid = s.sid "; 
     
         // $sql = "SELECT * FROM ticketing t WHERE t.cid = '".$id."'  ";
@@ -56,7 +56,11 @@ try {
             // echo "@@";
         }
     }
-    
+    else if($type == "cancel")
+    {
+        $cancel = $_GET['cancel'];
+        var_dump($cancel[1]);
+    }   
 } catch (PDOException $e) {
     echo("에러 내용: ".$e->getMessage());
 }
