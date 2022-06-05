@@ -3,8 +3,9 @@ myPage.addEventListener("click", my_page);
 var reservation = document.getElementById("reservation");
 reservation.addEventListener("click", reservation_);
 var _login = document.getElementById("login");
-var logout = document.getElementById("logout");
+var _logout = document.getElementById("logout");
 _login.addEventListener("click", login_);
+_logout.addEventListener("click", logout_);
 
 var search_ = document.getElementById("category_search");
 var title_ = document.getElementById("category_input");
@@ -283,6 +284,11 @@ function init() {
     $(`#logout`).hide();
   }
 }
+function logout_() {
+  sessionStorage.setItem("login", "false");
+  sessionStorage.setItem("id", 0);
+  location.reload();
+}
 function login_() {
   //asdasdd
   open("../html/login.html", "_self");
@@ -291,6 +297,7 @@ function login_() {
 function my_page() {
   open("../html/myPage.html", "_self");
 }
+
 function reservation_() {
   //관람 등급과 회원의 만나이 계산.
   //개봉일에 따라 상영중, 상영예정 갈림

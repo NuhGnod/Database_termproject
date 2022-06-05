@@ -1,72 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/myPage.css?ver=1" rel="stylesheet">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/myPage.css?ver=1" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="center">
-        <h1 id="main">CNU THEATER</h1>
+      <h1 id="main">CNU THEATER</h1>
     </div>
     <div id="board">
-        <div id="board_search">
-            <label for="category_input">시작 날짜</label>
-            <input  
-                class="category"
-                id="start_date"
-                placeholder="ex) 22/06/01"
-            />
-            <label for="date">종료 날짜</label>
-            <input class="category" id="end_date" placeholder="ex) 22/06/01">
-            <input type="button" id="category_search" value="검색" />
-            <br />
-          
-        </div>
-        
-        <div id="board_table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>제목
+      <div id="board_search">
+        <label for="category_input">시작 날짜</label>
+        <input class="category" id="start_date" placeholder="ex) 22/06/01" />
+        <label for="date">종료 날짜</label>
+        <input class="category" id="end_date" placeholder="ex) 22/06/01" />
+        <input type="button" id="category_search" value="검색" />
+        <br />
+      </div>
 
-                        </th>
-                        <th>상영관</th>
-                        <th>상영일</th>
-                        <th>영화 상영 시간</th>
-                        <!-- 선택은 영화 관람 전인 것 만 가능 -->
-                        <th>선택</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            범죄도시 2
-                        </td>
-                        <td>
-                            상영관 1
-                        </td>
-                        <td>
-                            22/06/02
-                        </td>
+      <div id="board_table">
+        <table>
+          <thead>
+            <tr>
+              <th>제목</th>
+              <th>상영관</th>
+              <th>상영일</th>
+              <th>영화 상영 시간</th>
+              <!-- 선택은 영화 관람 전인 것 만 가능 -->
+              <th>선택</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr>
+              <td>범죄도시 2</td>
+              <td>상영관 1</td>
+              <td>22/06/02</td>
 
-                        <td>
-                            12:00
-                        </td>
-                        <td>
-                            <input type="checkbox" class="check">
-                        </td>
-                       
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <button id="cancel">취소하기</button>
-
+              <td>12:00</td>
+              <td>
+                <input type="checkbox" class="check" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button id="cancel">취소하기</button>
     </div>
-</body>
-<script src="../js/myPage.js?ver=1"></script>
+  </body>
+  <script src="../js/myPage.js?ver=1"></script>
 </html>
