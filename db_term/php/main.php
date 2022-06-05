@@ -29,9 +29,18 @@ try {
             echo json_encode($row, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
         }
     }
+    // 2개
+    // ㄱ ,ㄴ
     else if($type == "schedule"){
-        $mid = $_GET['mid'];
-        $sql = "SELECT * FROM schedule s where s.mid = '".$mid."' ";
+        $mids = $_GET['mid'];
+        $st="";
+        for($i = 0; $i < count($mids)-1; $i+=1){
+            // echo $sids[$i];
+            $st = $st . $mids[$i]. ",";
+        }
+        $st = $st . $mids[count($mids)-1];
+
+        $sql = "SELECT * FROM schedule s where s.mid in  (".$st.")";
         $stmt = $conn -> prepare($sql);
         $stmt -> execute();
         while ($row = $stmt->fetchAll(PDO::FETCH_OBJ)) {
@@ -39,6 +48,8 @@ try {
             echo json_encode($row, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
         }   
     }
+    // ㄱ -> ㅇ
+    // ㄴ _> ㅇ
     else if($type == "ticketing"){
         $sids = $_GET['sids'];
         // $sids =  json_decode($sids, true);
@@ -65,7 +76,7 @@ try {
                 echo json_encode($row, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
                 // echo $i;
                 
-            }   
+        }   
     }
 
     //사용자로 부터 받은 데이터
