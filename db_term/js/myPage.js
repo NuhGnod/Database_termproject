@@ -40,12 +40,14 @@ function search() {
         let sid = text[i].SID;
         let seats = text[i].SEATS;
         let status = text[i].STATUS;
+        let tid = text[i].TICKETING_ID;
         info.push(room);
         info.push(sdate);
         info.push(mid);
         info.push(sid);
         info.push(seats);
         info.push(status);
+        info.push(tid);
         db_infos[i] = info;
         db_mids[mid] = Number(mid);
       }
@@ -97,17 +99,17 @@ function search() {
             let d1 = new Date(2000 + Number(csYY), Number(csMM), Number(csDD));
             let d2 = new Date(2000 + Number(ceYY), Number(ceMM), Number(ceDD));
 
-            console.log(d1 + " ", d2);
+            // console.log(d1 + " ", d2);
             let dateYY = infos[0][1].split(" ")[0].split("/")[0]; //쿼리문 상영 연도
             let dateMM = infos[0][1].split(" ")[0].split("/")[1]; //상영 월
             let dateDD = infos[0][1].split(" ")[0].split("/")[2]; //상영 일
             let dateTime = infos[0][1].split(" ")[1].split(".")[0];
             let dateDay = infos[0][1].split(" ")[0];
-            console.log(dateYY + " " + dateMM + " " + dateDD);
-            console.log(
-              d1 -
-                new Date(2000 + Number(dateYY), Number(dateMM), Number(dateDD))
-            );
+            // console.log(dateYY + " " + dateMM + " " + dateDD);
+            // console.log(
+            //   d1 -
+            //     new Date(2000 + Number(dateYY), Number(dateMM), Number(dateDD))
+            // );
             let queryDate = new Date(
               2000 + Number(dateYY),
               Number(dateMM),
@@ -115,22 +117,26 @@ function search() {
             ); //각 티켓팅 내역의 상영일 date객체.
             //범위 내의 내역만 보여준다.
             // if (d1 <= queryDate && d2 >= queryDate)
-            if (infos[0][5] == "r") {
-              // console.log(cYY);
-              //예약 상태 =  아직 안봄.
-              $(`#tbody`).append(`<tr class="row">
+            console.log(infos);
+            if (d1 <= queryDate && queryDate <= d2) {
+              console.log("ASD!!!");
+
+              if (infos[0][5] == "r") {
+                // console.log(cYY);
+                //예약 상태 =  아직 안봄.
+                $(`#tbody`).append(`<tr class="row">
                                                 <td>${movie_title}</td>
                                                 <td>${infos[0][0]}</td>
                                                 <td>${dateDay}</td>
-                                                <td>${infos[0][1]}</td>
+                                                <td id="${infos[0][6]}">${infos[0][1]}</td>
                                                 <td>${infos[0][5]}</td>
                                                 
                                                 <td><input class = "check" type="checkbox"></td>
                                                 
                                                 <tr>`);
-            } else {
-              //예약 상태가 아닌것은 선택 불가.
-              $(`#tbody`).append(`<tr class="row">
+              } else {
+                //예약 상태가 아닌것은 선택 불가.
+                $(`#tbody`).append(`<tr class="row">
                 <td>${movie_title}</td>
                 <td>${infos[0][0]}</td>
                 <td>${infos[0][1]}</td>
@@ -140,8 +146,8 @@ function search() {
                 <td><input class = "check" disabled="true" type="checkbox"></td>
                 
                 <tr>`);
+              }
             }
-
             // console.log(movie_title);
           }
           $(`.check`).on("click", function () {
@@ -151,14 +157,30 @@ function search() {
             let dateDay = $(this).parent().parent().children().eq(2).text();
             let dateTime = $(this).parent().parent().children().eq(3).text();
             let status = $(this).parent().parent().children().eq(4).text();
-            temp.push(title);
-            temp.push(room);
-            temp.push(dateDay);
-            temp.push(dateTime);
-            temp.push(status);
-            cancel_infos.push(temp);
-            console.log(cancel_infos);
-            console.log($(this).parent().parent().children().eq(1).text());
+            let tid = $(this).parent().parent().children().eq(3)[0].id; //해당 row 의ticketing id값.
+            tid = Number(tid);
+            let flag = $(this)
+              .parent()
+              .parent()
+              .children()
+              .find('input[type="checkbox"]')
+              .is(":checked"); //해당 row 의ticketing id값.
+            console.log(typeof tid);
+            console.log(flag);
+            console.log(temp);
+
+            if (flag == true) {
+              temp.push(title);
+              temp.push(room);
+              temp.push(dateDay);
+              temp.push(dateTime);
+              temp.push(status);
+              temp.push(Number(tid));
+              cancel_infos.push(temp);
+              console.log(cancel_infos);
+              console.log($(this).parent().parent().children().eq(1).text());
+            } else {
+            }
           });
         },
         error: function (e) {
@@ -192,6 +214,7 @@ function cancel_() {
       cancel: cancel_infos,
     },
     success: function (res) {
+      cancel_infos = [];
       console.log(res);
     },
     error: function (e) {
@@ -199,4 +222,5 @@ function cancel_() {
     },
   });
   alert("취소되었습니다.");
+  //   location.reload();
 }

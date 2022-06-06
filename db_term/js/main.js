@@ -6,7 +6,7 @@ var _login = document.getElementById("login");
 var _logout = document.getElementById("logout");
 _login.addEventListener("click", login_);
 _logout.addEventListener("click", logout_);
-
+let reservation_infos = [];
 var search_ = document.getElementById("category_search");
 var title_ = document.getElementById("category_input");
 var yy_ = document.getElementById("yy");
@@ -21,6 +21,7 @@ function search() {
   let db_actors = [];
   let actors = [];
   let db_ticketing_infoR = [];
+  let db_ticketing_infoRR = [];
   let db_ticketing_infoW = [];
   let db_length;
   let db_rating;
@@ -37,6 +38,8 @@ function search() {
   let scheduleText;
   let ticketingText;
   let movieInfos = [];
+  console.log(db_ticketing_infoRR);
+  console.log(db_ticketing_infoW);
   // console.log(title)
   if (title != "" && yy != "" && mm != "" && dd != "") {
     $("tbody").empty();
@@ -45,6 +48,7 @@ function search() {
       type: "GET",
       data: {
         keyword: title,
+        async: false,
         type: "movie_actor", //영화 정보와, 출연자 데이터 받음.
       },
       success: function (res) {
@@ -92,6 +96,7 @@ function search() {
               keyword: title,
               type: "schedule", //스케쥴 데이터를 얻음.
               mid: db_mids,
+              async: false,
             },
             success: function (res) {
               console.log(res);
@@ -114,6 +119,7 @@ function search() {
                   keyword: title,
                   type: "ticketing", //스케쥴 데이터를 얻음.
                   sids: db_sids,
+                  async: false,
                 },
                 success: function (res) {
                   if (res == "") {
@@ -128,37 +134,45 @@ function search() {
                   console.log(scheduleText);
                   console.log(ticketingText);
                   //초기화 과정
-
+                  console.log(ticketingText.length);
+                  console.log(db_ticketing_infoRR);
                   for (let i = 0; i < movieText.length; i++) {
                     // let cid = Number(text[i].CID);
                     //mid별로 관리
-
-                    db_ticketing_infoR[movieText[i].MID] = 0;
+                    db_ticketing_infoRR[movieText[i].MID] = 0;
                     db_ticketing_infoW[movieText[i].MID] = 0;
                   }
+                  console.log(db_ticketing_infoRR);
+                  console.log(db_ticketing_infoW);
                   let mid_sid = [];
                   for (let q = 0; q < db_mids.length; q++) {
                     let mid = Number(db_mids[q]);
                     console.log(`mid : ${mid}`);
 
                     for (let i = 0; i < movieText.length; i++) {
+                      //영화 별 mid값으로 영화 데이터 파싱.
                       movieInfos[movieText[i].MID] = movieText[i];
                       mid_sid[mid] = 0;
                     }
-                    console.log(movieInfos);
+                    console.log(ticketingText.length);
                     for (let i = 0; i < scheduleText.length; i++) {
                       let sid = Number(scheduleText[i].SID);
-
+                      console.log(`sid : ${sid}`);
                       for (let j = 0; j < ticketingText.length; j++) {
-                        let status = ticketingText[i].STATUS;
-
+                        let status = ticketingText[j].STATUS;
+                        console.log(status);
                         if (
-                          scheduleText[i].MID == mid &&
+                          Number(scheduleText[i].MID) == Number(mid) &&
                           Number(sid) == Number(ticketingText[j].SID)
                         ) {
                           //동일 영화 동일 스케쥴
+                          let cnt = 0;
                           if (status == "r") {
-                            db_ticketing_infoR[mid] += Number(
+                            console.log(
+                              ticketingText[j].TICKETING_ID + "###########"
+                            );
+                            cnt += Number(ticketingText[j].SEATS);
+                            db_ticketing_infoRR[mid] += Number(
                               ticketingText[j].SEATS
                             );
                           }
@@ -167,6 +181,7 @@ function search() {
                               ticketingText[j].SEATS
                             );
                           }
+                          console.log(`cnt : ${cnt}`);
                         }
                       }
                     }
@@ -216,7 +231,7 @@ function search() {
                                                 <td>${db_actors[mid]}</td>
                                                 <td>${movieInfos[mid].LENGTH}</td>
                                                 <td>${movieInfos[mid].RATING}</td>
-                                                <td>${db_ticketing_infoR[mid]}</td>
+                                                <td>${db_ticketing_infoRR[mid]}</td>
                                                 <td>${db_ticketing_infoW[mid]}</td>
                                                 <td><input class = "check" disabled="true" type="checkbox"></td>
                                                 
@@ -231,14 +246,80 @@ function search() {
                       <td>${db_actors[mid]}</td>
                       <td>${movieInfos[mid].LENGTH}</td>
                       <td>${movieInfos[mid].RATING}</td>
-                      <td>${db_ticketing_infoR[mid]}</td>
+                      <td>${db_ticketing_infoRR[mid]}</td>
                       <td>${db_ticketing_infoW[mid]}</td>
                                                 <td><input class="check"  type="checkbox"></td>
                                                 
                                                 <tr>`);
                     }
                   }
+                  $(`.check`).on("click", function () {
+                    let temp = [];
+                    let title = $(this)
+                      .parent()
+                      .parent()
+                      .children()
+                      .eq(0)
+                      .text();
+                    let open = $(this)
+                      .parent()
+                      .parent()
+                      .children()
+                      .eq(1)
+                      .text();
+                    let director = $(this)
+                      .parent()
+                      .parent()
+                      .children()
+                      .eq(2)
+                      .text();
+                    let actors = $(this)
+                      .parent()
+                      .parent()
+                      .children()
+                      .eq(3)
+                      .text();
+                    let runnigTime = $(this)
+                      .parent()
+                      .parent()
+                      .children()
+                      .eq(4)
+                      .text();
+                    let rating = $(this)
+                      .parent()
+                      .parent()
+                      .children()
+                      .eq(5)
+                      .text();
 
+                    let tid = $(this).parent().parent().children().eq(3)[0].id; //해당 row 의ticketing id값.
+                    tid = Number(tid);
+                    let flag = $(this)
+                      .parent()
+                      .parent()
+                      .children()
+                      .find('input[type="checkbox"]')
+                      .is(":checked"); //해당 row 의ticketing id값.
+                    console.log(typeof tid);
+                    console.log(flag);
+                    console.log(temp);
+
+                    if (flag == true) {
+                      temp.push(title);
+                      temp.push(open);
+                      temp.push(director);
+                      temp.push(actors);
+                      temp.push(runnigTime);
+                      temp.push(rating);
+                      temp.push("#");
+                      reservation_infos.push(temp);
+                      console.log(reservation_infos);
+                      console.log(
+                        $(this).parent().parent().children().eq(1).text()
+                      );
+                    } else {
+                    }
+                  });
                   console.log(db_ticketing_infoR);
                   console.log(db_ticketing_infoW);
                   let sids = [];
@@ -301,7 +382,7 @@ function my_page() {
 function reservation_() {
   //관람 등급과 회원의 만나이 계산.
   //개봉일에 따라 상영중, 상영예정 갈림
+  sessionStorage.setItem("reservation", reservation_infos);
 
-  //성공 시,
   open("../html/reservation.html", "_self");
 }

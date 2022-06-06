@@ -1,69 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/reservatoin.css?ver=1" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/reservatoin.css?ver=1" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1 id="main">CNU THEATER</h1>
     <div class="container">
+      <div class="movie_schedule">
+        <table>
+          <thead>
+            <tr>
+              <th>영화제목</th>
+              <th>상영관</th>
+              <th>상영일</th>
+              <th>영화 상영 시간</th>
+              <th>예매 가능한 좌석 수</th>
+              <th>예매 수</th>
 
-        <div class="movie_schedule">
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            영화제목
-                        </th>
-                        <th>상영관</th>
-                        <th>
-                            상영일
-                        </th>
-                        <th>영화 상영 시간</th>
-                        <th>예매 가능한 좌석 수</th>
-                        <th>
-                            예매 수
-                        </th>
-                        
-                        <th>선택</th>
-                    </tr>
-
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            범죄 도시2
-                        </td>
-                        <td>
-                            상영관 1번
-                        </td>
-                        <td>
-                            22/06/02
-                        </td>
-                        <td>12:00</td>
-                        <td>
-                            100석
-                        </td>
-                        <td>
-                            27석
-                        </td>
-                        <td>
-                            <input type="checkbox" class="check_room">
-                        </td>
-                        
-                    </tr>
-                </tbody>
-
-            </table>
-            <button id="reservation">예매하기</button>
-
-        </div>
-
+              <th>선택</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr>
+              <td>범죄 도시2</td>
+              <td>상영관 1번</td>
+              <td>22/06/02</td>
+              <td>12:00</td>
+              <td>100석</td>
+              <td>27석</td>
+              <td>
+                <input type="checkbox" class="check_room" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button id="reservation">예매하기</button>
+      </div>
     </div>
-</body>
-<script src="../js/reservation.js?ver=1"></script>
-
+  </body>
+  <script src="../js/reservation.js?ver=1"></script>
 </html>
