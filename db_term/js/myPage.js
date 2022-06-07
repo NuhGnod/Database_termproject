@@ -16,6 +16,10 @@ function search() {
   let s_date, e_date;
   s_date = document.getElementById("start_date").value;
   e_date = document.getElementById("end_date").value;
+  if (s_date == "" || e_date == "") {
+    alert(`범위를 입력하세요.`);
+    return;
+  }
   console.log(s_date);
   console.log(e_date);
   let id0 = sessionStorage.getItem("id");
@@ -30,6 +34,10 @@ function search() {
     },
     success: function (res) {
       console.log(res);
+      if (res.trim() == "") {
+        alert(`검색결과가 없습니다.`);
+        return;
+      }
       let text = JSON.parse(res);
       console.log(text);
       for (let i = 0; i < text.length; i++) {

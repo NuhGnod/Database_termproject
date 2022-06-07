@@ -30,7 +30,7 @@ try {
         $sql = "SELECT s.sdatetime , s.tname, s.mid, s.sid, th.seats from schedule s,
                 ( select mid from movie m where m.title in (".$st.")) mm , 
                 (select tname, seats from theater) th
-                where s.mid in (mm.mid) and th.tname in (s.tname) ";
+                where s.mid in (mm.mid) and th.tname in (s.tname)";
         $stmt = $conn -> prepare($sql);
                     $stmt -> execute();
                     // echo "#ASD";
@@ -66,7 +66,7 @@ try {
         // echo $st;
 
         $sql = 
-        "SELECT sid, sum(seats) sumSEATS from ticketing where sid in (".$st.") group by sid" ;
+        "SELECT sid, sum(seats) sumSEATS from ticketing where status in ('r') and sid in (".$st.") group by sid" ;
 
         $stmt = $conn -> prepare($sql);
         $stmt -> execute();
@@ -77,6 +77,43 @@ try {
                         // echo $i;
                 
         }   
+    }
+    else if($type == "update"){
+        $info = $_GET['info'];
+        $st="";
+        // $st = json_encode($info);
+        for($i = 0; $i < count($info)-1; $i+=1){
+            
+            $st = $st.$info[$i]. ",";
+
+        }
+        $st = $st . $info[count($info)-1];
+        $st = explode(",", $st);
+// var_dump($st);
+        // echo $st[2];
+        $st =  "TO_DATE(" . "'". $st[2]."'" . ", '" .
+        "yy/mm/dd HH24:MI:SS')," 
+        .
+         $st[5] . "," . "'r'". ",". $st[7] . "," . $st[6];
+        // echo $st; 
+        //맨 마지막은 cid값.
+            //ticketing _id는 자동 증가.
+        $sql = "INSERT into TICKETING (RC_DATE, SEATS, STATUS, CID,SID)
+        VALUES( ".$st." )";
+        // echo $sql;
+        
+        $stmt = $conn -> prepare($sql);
+        try {
+            $conn -> beginTransaction();
+            $stmt->execute();
+            $conn-> commit();
+            echo "true";
+        } catch (PDOException $e) {
+            $conn -> rollback();
+            echo("에러 내용: ".$e->getMessage());
+        }
+        
+
     }
 
     
