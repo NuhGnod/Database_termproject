@@ -15,6 +15,7 @@ function init() {
   //db연동
   let arr = [];
   let reservation = sessionStorage.getItem("reservation").split(",#,");
+  //선택한 영화의 정보를 파싱한다.
   let temp = [];
   for (let i = 0; i < reservation.length; i++) {
     let title = reservation[i].split(",")[0];
@@ -50,7 +51,7 @@ function init() {
       }
       console.log(schedule_infos);
       $.ajax({
-        //init으로 모든 상영관 정보 출력.
+        //init()으로 모든 상영관 정보 출력.
         url: "../php/reservation.php",
         type: "GET",
         data: {
@@ -77,6 +78,7 @@ function init() {
               type: "count", //예매자 수.
               sids: sids,
             },
+            //영화의 sid들을 넘겼으므로 해당 영화의 티켓팅 내역을의 예매 좌석 합이 넘어온다.
             success: function (res) {
               console.log(res);
               let text = JSON.parse(res);
@@ -97,6 +99,7 @@ function init() {
                   if (tname_ == tname) {
                     //동일 영화룸
                     remain_seats = seats - sumSeats; //남아있는 좌석수
+                    //총 좌석수에서 예약 좌석수를 빼 계산한다.
                     break;
                   }
                 }

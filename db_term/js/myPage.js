@@ -22,14 +22,14 @@ function search() {
   }
   console.log(s_date);
   console.log(e_date);
-  let id0 = sessionStorage.getItem("id");
+  let id0 = sessionStorage.getItem("id"); //로그인한 회원의 cid값을 받는다.
   console.log(id0);
   console.log(`myPage`);
   $.ajax({
     url: "../php/myPage.php",
     type: "GET",
     data: {
-      id: Number(id0),
+      id: Number(id0), //id를 넘겨, id에 해당되는 티켓팅 내역을 받는다.
       type: "ticket_schedule",
     },
     success: function (res) {
@@ -41,6 +41,7 @@ function search() {
       let text = JSON.parse(res);
       console.log(text);
       for (let i = 0; i < text.length; i++) {
+        //스케쥴별로 받아온 데이터들을 순서대로 배열에 넣는다.
         let info = [];
         let room = text[i].TNAME;
         let sdate = text[i].SDATETIME;
@@ -66,7 +67,7 @@ function search() {
         url: "../php/myPage.php",
         type: "GET",
         data: {
-          type: "movie",
+          type: "movie", //스케쥴의 mid값들을 넘겨주어, 무슨 영화인지 알아낸다.
           mid: db_mids,
         },
         success: function (res) {
@@ -84,13 +85,14 @@ function search() {
           for (let i = 0; i < db_infos.length; i++) {
             let infos = []; //db_infos 파싱한 배열.
             infos.push(db_infos[i]); //2idx가 mid
-            // console.log(infos[0][0]);
-            // console.log(infos[0]);
+
             let movie_title;
 
             for (let i = 0; i < text.length; i++) {
               if (Number(text[i].MID) == Number(infos[0][2])) {
                 //mid동일. 찾음.
+
+                //해당 스케쥴의 영화 제목을 찾았다는 것.
                 movie_title = text[i].TITLE;
               }
             }

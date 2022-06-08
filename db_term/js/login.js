@@ -16,6 +16,7 @@ document.getElementById("login").addEventListener("click", login);
 var loginOk = 0;
 
 function login() {
+  //입력한 아이디와 비밀번호. 값
   var id0 = document.getElementById("id").value;
   var pw0 = document.getElementById("password").value;
 
@@ -44,9 +45,12 @@ function login() {
           b = true;
         }
         if (b == true) {
+          //세션을 통해 아이디를 저장.
           sessionStorage.setItem("id", id0);
           sessionStorage.setItem("login", true);
-
+          //만약 로그인정보가 관리자 라면
+          //관리자패이지로 이동
+          // 일반 회원이라면 메인 페이지로 이동.
           if (Number(id0) == 99999) {
             alert("관리자 로그인 되었습니다.");
 
