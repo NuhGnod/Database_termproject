@@ -230,5 +230,5 @@ function cancel_() {
     },
   });
   alert("취소되었습니다.");
-  //   location.reload();
+  location.reload();
 }

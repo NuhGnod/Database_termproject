@@ -1,0 +1,22 @@
+h1 {
+  /* justify-self: center; */
+  text-align: center;
+}
+table {
+  font-family: "arial", "sans-serif";
+
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+tr {
+  border-bottom: 1px solid black;
+}
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  /* border:  1px solid black; */
+}
+th {
+  background-color: grey;
+}
